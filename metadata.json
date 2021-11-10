@@ -1,0 +1,27 @@
+{
+  "version": "1.0.0",
+  "defaultFile": "contracts/Bank.sol",
+  "environment": "solidity",
+  "setupCommands": ["npm i", "npx hardhat compile"],
+  "compileCommand": "npx hardhat compile",
+  "tests": [
+    { "itShould": "Compile bank.sol", "command": "sh learn_tests/01.sh" },
+    {
+      "itShould": "Test getAllowanceERC20 function and return the correct allowance",
+      "command": "sh learn_tests/02.sh"
+    },
+    {
+      "itShould": "Test addBalanceERC20 function and transfer ERC20 token to the bank contract from sender",
+      "command": "sh learn_tests/03.sh"
+    },
+    {
+      "itShould": "should swap ERC20 token for ETH after transferring",
+      "command": "sh learn_tests/04.sh"
+    },
+    {
+      "itShould": "should deposit eth to compound after swapping",
+      "command": "sh learn_tests/05.sh"
+    }
+  ],
+  "learnerAccessibleFileList": ["contracts/*"]
+}
