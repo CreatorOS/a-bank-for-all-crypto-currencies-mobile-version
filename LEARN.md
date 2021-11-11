@@ -84,17 +84,7 @@ The second step after the function has been called is to use the transferFrom() 
 
 The “approval” will have to happen outside the smart contract. Until the approval is granted, the smart contract cannot do anything with the users tokens. We cannot convert them to ETH using uniswap in our contract, we can’t deposit them to Compound etc.
 
-We will transfer all the money the user has approved into the account of our smart contract. We will then send to the uniswap smart contract for converting to ETH.
-
-```
-    // how many erc20tokens has the user (msg.sender) approved this contract to use?
-    uint approvedAmountOfERC20Tokens = erc20.allowance(msg.sender, address(this));
-
-    // transfer all those tokens that had been approved by user (msg.sender) to the smart contract (address(this))
-    erc20.transferFrom(msg.sender, address(this), approvedAmountOfERC20Tokens);
-```
-
-Also add a function to get the erc20 token balance of our smart contract, so that we can do a sanity check that everything is working.
+Let's add a function to get the erc20 token balance of our smart contract, so that we can do a sanity check that everything is working.
 
 ```
 function getAllowanceERC20(address erc20TokenSmartContractAddress) public view returns(uint){
@@ -110,9 +100,24 @@ Hit `Run` to test the code we just wrote.
 
 - In 2nd test output you will see the test script approved some DAI token to our smart contract from one of the test accounts.
 - After that it calls `approve()` function to approve the smart contract to spend the DAI tokens worth `1 ether` which is approximately 4304 DAI tokens at the time of writing.
-- In 3rd test output you will see the test script transfers the approved DAI tokens to our smart contract from one of the test accounts using the code we wrote earlier in the `addBalanceERC20()` function.
 
-## sending DAI to Uniswap
+## Transferring ERC30 tokens from user to smart contract
+
+For the second step, we will transfer all the money the user has approved into the account of our smart contract. We will then send to the uniswap smart contract for converting to ETH.
+
+Code this up in `addBalanceERC20()` function:
+```
+    // how many erc20tokens has the user (msg.sender) approved this contract to use?
+    uint approvedAmountOfERC20Tokens = erc20.allowance(msg.sender, address(this));
+
+    // transfer all those tokens that had been approved by user (msg.sender) to the smart contract (address(this))
+    erc20.transferFrom(msg.sender, address(this), approvedAmountOfERC20Tokens);
+```
+
+Hit `Run` to check if the transfer functionality is working or not now.
+- In 3rd test output you will see the test script transfers the approved DAI tokens to our smart contract from one of the test accounts using the code we wrote in the `addBalanceERC20()` function.
+
+## Uniswap for swapping tokens
 
 Now that we have transferred the DAIs from the user (msg.sender)’s account to the smart contract’s account using transferFrom(), we can now start looking at exchanging it for ETH before we can send it to compound.
 
@@ -163,6 +168,8 @@ Also, we need to initialize the UniswapRouter object with the UniswapRouter cont
 address UNISWAP_ROUTER_ADDRESS = 0xf164fC0Ec4E93095b804a4795bBe1e041497b92a;
 UniswapRouter uniswap = UniswapRouter(UNISWAP_ROUTER_ADDRESS);
 ```
+
+## Sending DAI to Uniswap
 
 Let’s now go to addBalance function and add the code for converting erc20 tokens into eth. I.e. invoke swapExactTokensForETH with the right set of parameters..
 
