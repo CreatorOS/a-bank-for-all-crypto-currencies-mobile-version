@@ -101,7 +101,7 @@ Hit `Run` to test the code we just wrote.
 - In 2nd test output you will see the test script approved some DAI token to our smart contract from one of the test accounts.
 - After that it calls `approve()` function to approve the smart contract to spend the DAI tokens worth `1 ether` which is approximately 4304 DAI tokens at the time of writing.
 
-## Transferring ERC30 tokens from user to smart contract
+## Transferring ERC20 tokens from user to smart contract
 
 For the second step, we will transfer all the money the user has approved into the account of our smart contract. We will then send to the uniswap smart contract for converting to ETH.
 
