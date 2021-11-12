@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.7.0 <0.9.0;
 
-import "hardhat/console.sol";
-
 interface cETH {
     // define functions of COMPOUND we'll be using
 
@@ -49,7 +47,6 @@ contract SmartBankAccount {
     function getBalance(address userAddress) public view returns (uint256) {
         uint256 balance = (balances[userAddress] *
             (ceth.exchangeRateStored())) / 1e18;
-        console.log("Balance: ", balance);
         return balance;
     }
 
