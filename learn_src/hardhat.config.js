@@ -22,7 +22,7 @@ module.exports = {
   networks: {
     hardhat: {
       forking: {
-        url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_KEY}`,
+        url: `https://aged-divine-brook.quiknode.pro/${process.env.QUICKNODE_KEY}/`,
         blockNumber: 13517905,
       },
     },
