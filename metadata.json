@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "defaultFile": "contracts/Bank.sol",
   "environment": "solidity",
-  "setupCommands": ["npx hardhat compile"],
+  "setupCommands": ["npm i", "npx hardhat compile"],
   "compileCommand": "npx hardhat compile",
   "tests": [
     { "itShould": "Compile bank.sol", "command": "sh learn_tests/01.sh" },
